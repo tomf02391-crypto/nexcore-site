@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DNSHE 域名管理后台 - 域名列表与解析记录管理" />
+  <title>域名管理 - NexCore 科技</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">N</span>
+        <span>NexCore 科技</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="about.html">关于我们</a>
+        <a href="products.html">产品服务</a>
+        <a href="cases.html">客户案例</a>
+        <a href="pricing.html">价格方案</a>
+        <a href="team.html">团队团队</a>
+        <a href="blog.html">新闻动态</a>
+        <a href="faq.html">常见问题</a>
+        <a href="contact.html">联系我们</a>
+        <a href="dns.html">域名管理</a>
+      </nav>
+      <button class="nav-toggle" aria-label="切换导航菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 页头横幅 -->
+  <section class="hero" style="padding: 64px 0;">
+    <div class="container">
+      <div class="hero-content" style="text-align:center; margin: 0 auto; max-width: 760px;">
+        <span class="tagline">DNSHE DOMAIN HUB</span>
+        <h1>域名管理后台</h1>
+        <p>基于 DNSHE v2.0 API 的免费域名管理面板，支持域名列表查看与解析记录维护。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 管理区 -->
+  <section class="section" style="padding-top: 48px;">
+    <div class="container">
+
+      <!-- 提示消息 -->
+      <div class="msg" id="msgBox"></div>
+
+      <!-- 密钥配置面板 -->
+      <div class="dns-panel">
+        <div class="panel-head">
+          <div>
+            <h2>API 密钥配置</h2>
+            <div class="panel-sub">已预填默认密钥，可在此修改后保存（存储于浏览器 localStorage）</div>
+          </div>
+          <span class="badge badge-ok" id="configState">已使用预填密钥</span>
+        </div>
+
+        <div class="security-tip">
+          <span class="tip-icon">⚠</span>
+          <div>
+            <strong>安全提示：</strong>API 密钥等同于账户访问凭证，保存于浏览器 localStorage 仅供本机使用。
+            请勿将本页面部署到公开环境或将密钥提交到代码仓库；如密钥泄露，请及时在 DNSHE 控制台重置。
+          </div>
+        </div>
+
+        <div class="config-grid">
+          <div class="form-group">
+            <label for="apiKey">API Key <span class="required">*</span></label>
+            <input type="password" id="apiKey" name="apiKey" autocomplete="off" placeholder="请输入 API Key" />
+          </div>
+          <div class="form-group">
+            <label for="apiSecret">API Secret <span class="required">*</span></label>
+            <input type="password" id="apiSecret" name="apiSecret" autocomplete="off" placeholder="请输入 API Secret" />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="baseUrl">API Base URL</label>
+            <input type="text" id="baseUrl" name="baseUrl" placeholder="https://api005.dnshe.com/index.php?m=domain_hub" />
+          </div>
+        </div>
+
+        <div class="config-actions">
+          <button class="btn btn-primary btn-sm" id="saveConfigBtn" type="button">保存配置</button>
+          <button class="btn btn-secondary btn-sm" id="resetConfigBtn" type="button">恢复默认密钥</button>
+          <button class="btn btn-outline btn-sm" id="toggleSecretBtn" type="button" style="color: var(--gray-600); border-color: var(--gray-400);">显示密钥</button>
+        </div>
+      </div>
+
+      <!-- 域名列表 -->
+      <div class="dns-panel">
+        <div class="panel-head">
+          <div>
+            <h2>域名列表</h2>
+            <div class="panel-sub">当前 DNSHE 账户下的子域名（subdomains）</div>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="domainSearch" placeholder="搜索域名..." />
+          </div>
+          <button class="btn btn-primary btn-sm" id="refreshDomainsBtn" type="button">刷新列表</button>
+        </div>
+        <div class="dns-table-wrap">
+          <table class="dns-table" id="domainsTable">
+            <thead>
+              <tr>
+                <th>域名</th>
+                <th>状态</th>
+                <th>到期时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="domainsBody">
+              <tr class="empty-row"><td colspan="4">点击「刷新列表」加载域名数据</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 解析记录 -->
+      <div class="dns-panel">
+        <div class="panel-head">
+          <div>
+            <h2>解析记录</h2>
+            <div class="panel-sub">选择上方域名后，可查看 / 搜索 / 新增 / 批量删除 / 编辑 TTL 解析记录</div>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="recordSearch" placeholder="搜索类型 / 主机记录 / 记录值..." />
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-secondary btn-sm" id="refreshRecordsBtn" type="button">刷新记录</button>
+            <button class="btn btn-danger btn-sm" id="batchDeleteBtn" type="button" disabled>批量删除</button>
+            <button class="btn btn-primary btn-sm" id="addRecordBtn" type="button" disabled>新增记录</button>
+          </div>
+        </div>
+        <div class="dns-table-wrap">
+          <table class="dns-table" id="recordsTable">
+            <thead>
+              <tr>
+                <th style="width:36px;"><input type="checkbox" id="selectAllRecords" title="全选本页" /></th>
+                <th>类型</th>
+                <th>主机记录</th>
+                <th>记录值</th>
+                <th>TTL</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="recordsBody">
+              <tr class="empty-row"><td colspan="6">请先选择域名并刷新列表</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="recordPagination" style="display:none;">
+          <span class="page-info" id="pageInfo">—</span>
+          <div class="page-btns">
+            <button class="btn btn-outline btn-sm" id="pagePrevBtn" type="button" disabled>上一页</button>
+            <span class="page-nums" id="pageNums"></span>
+            <button class="btn btn-outline btn-sm" id="pageNextBtn" type="button" disabled>下一页</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 新增记录表单（内联） -->
+      <div class="dns-panel" id="addRecordPanel" style="display:none;">
+        <div class="panel-head">
+          <h2>新增解析记录</h2>
+          <span class="panel-sub" id="addRecordTarget">—</span>
+        </div>
+        <div class="config-grid">
+          <div class="form-group">
+            <label for="recType">记录类型 <span class="required">*</span></label>
+            <select id="recType">
+              <option value="A">A</option>
+              <option value="AAAA">AAAA</option>
+              <option value="CNAME">CNAME</option>
+              <option value="MX">MX</option>
+              <option value="TXT">TXT</option>
+              <option value="NS">NS</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="recName">主机记录 <span class="required">*</span></label>
+            <input type="text" id="recName" placeholder="如 @ 或 www / sub" />
+          </div>
+          <div class="form-group">
+            <label for="recValue">记录值 <span class="required">*</span></label>
+            <input type="text" id="recValue" placeholder="如 1.2.3.4 / target.example.com" />
+          </div>
+          <div class="form-group">
+            <label for="recTtl">TTL（秒）</label>
+            <input type="number" id="recTtl" value="600" min="60" step="60" />
+          </div>
+        </div>
+        <div class="config-actions">
+          <button class="btn btn-primary btn-sm" id="submitRecordBtn" type="button">提交记录</button>
+          <button class="btn btn-secondary btn-sm" id="cancelRecordBtn" type="button">取消</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo" style="color:#fff;">
+            <span class="logo-icon">N</span>
+            <span>NexCore 科技</span>
+          </a>
+          <p style="margin-top:14px;">让科技驱动未来。NexCore 科技致力于通过云计算、人工智能与数据智能技术，帮助企业实现数字化转型升级。</p>
+        </div>
+        <div class="footer-col">
+          <h4>快速导航</h4>
+          <a href="index.html">首页</a>
+          <a href="about.html">关于我们</a>
+          <a href="products.html">产品服务</a>
+          <a href="cases.html">客户案例</a>
+          <a href="pricing.html">价格方案</a>
+          <a href="team.html">团队团队</a>
+          <a href="blog.html">新闻动态</a>
+          <a href="faq.html">常见问题</a>
+          <a href="contact.html">联系我们</a>
+          <a href="dns.html">域名管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>产品服务</h4>
+          <a href="products.html">NexCloud 云平台</a>
+          <a href="products.html">NexAI 智能平台</a>
+          <a href="products.html">NexData 数据中台</a>
+          <a href="products.html">企业数字化咨询</a>
+        </div>
+        <div class="footer-col">
+          <h4>联系方式</h4>
+          <a href="contact.html">深圳市南山区科技园 NexCore 大厦</a>
+          <a href="contact.html">400-888-8888</a>
+          <a href="contact.html">contact@nexcore.example.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="currentYear">2026</span> NexCore 科技（示例站点）。保留所有权利。
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-top" aria-label="返回顶部">↑</button>
+
+  <!-- 删除确认模态框 -->
+  <div class="modal-mask" id="deleteModal">
+    <div class="modal-box">
+      <h3>确认删除解析记录？</h3>
+      <p id="deleteModalText">—</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary btn-sm" id="deleteCancelBtn" type="button">取消</button>
+        <button class="btn btn-danger btn-sm" id="deleteConfirmBtn" type="button">确认删除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dns-config.js"></script>
+  <script src="js/dns-page.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

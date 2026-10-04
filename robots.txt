@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /dns.html
+
+Sitemap: https://www.nexcore.example.com/sitemap.xml
+（内容由AI生成，仅供参考）

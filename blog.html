@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NexCore 科技新闻与博客 - 行业洞察、产品动态与技术分享" />
+  <title>新闻动态 - NexCore 科技</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">N</span>
+        <span>NexCore 科技</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="about.html">关于我们</a>
+        <a href="products.html">产品服务</a>
+        <a href="cases.html">客户案例</a>
+        <a href="pricing.html">价格方案</a>
+        <a href="team.html">团队团队</a>
+        <a href="blog.html">新闻动态</a>
+        <a href="faq.html">常见问题</a>
+        <a href="contact.html">联系我们</a>
+        <a href="dns.html">域名管理</a>
+      </nav>
+      <button class="nav-toggle" aria-label="切换导航菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 页头横幅 -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="tagline">NEWS &amp; INSIGHTS</span>
+      <h1>新闻动态</h1>
+      <p>行业洞察、产品动态与技术分享，记录 NexCore 与数字化的每一步。</p>
+    </div>
+  </section>
+
+  <!-- 博客列表 -->
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid" id="blogGrid">
+        <!-- 由 JS 渲染 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo" style="color:#fff;">
+            <span class="logo-icon">N</span>
+            <span>NexCore 科技</span>
+          </a>
+          <p style="margin-top:14px;">让科技驱动未来。NexCore 科技致力于通过云计算、人工智能与数据智能技术，帮助企业实现数字化转型升级。</p>
+        </div>
+        <div class="footer-col">
+          <h4>快速导航</h4>
+          <a href="index.html">首页</a>
+          <a href="about.html">关于我们</a>
+          <a href="products.html">产品服务</a>
+          <a href="cases.html">客户案例</a>
+          <a href="pricing.html">价格方案</a>
+          <a href="team.html">团队团队</a>
+          <a href="blog.html">新闻动态</a>
+          <a href="faq.html">常见问题</a>
+          <a href="contact.html">联系我们</a>
+          <a href="dns.html">域名管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>产品服务</h4>
+          <a href="products.html">NexCloud 云平台</a>
+          <a href="products.html">NexAI 智能平台</a>
+          <a href="products.html">NexData 数据中台</a>
+          <a href="products.html">企业数字化咨询</a>
+        </div>
+        <div class="footer-col">
+          <h4>联系方式</h4>
+          <a href="contact.html">深圳市南山区科技园 NexCore 大厦</a>
+          <a href="contact.html">400-888-8888</a>
+          <a href="contact.html">contact@nexcore.example.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="currentYear">2026</span> NexCore 科技（示例站点）。保留所有权利。
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-top" aria-label="返回顶部">↑</button>
+
+  <!-- 文章详情弹层 -->
+  <div class="modal-mask" id="articleModal">
+    <div class="modal-box modal-article">
+      <div class="article-title" id="articleTitle">—</div>
+      <div class="article-meta" id="articleMeta">—</div>
+      <div class="article-body" id="articleBody"></div>
+      <div class="modal-actions" style="margin-top:20px;">
+        <button class="btn btn-secondary btn-sm" id="articleCloseBtn" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- 博客文章数据（示例内容） ---------- */
+    var POSTS = [
+      {
+        title: "NexCloud 3.0 正式发布：更弹性的企业云底座",
+        date: "2026-09-28",
+        category: "产品动态",
+        icon: "☁",
+        summary: "新一代云平台带来秒级弹性伸缩、跨可用区高可用与智能成本优化，帮助企业以更优成本支撑业务增长。",
+        content: "<p>经过数月研发与灰度验证，NexCloud 3.0 于今日正式发布。新版本围绕弹性、可靠与成本三个维度进行了全面升级。</p><h4>秒级弹性伸缩</h4><p>基于全新的调度引擎，计算资源扩容时间从分钟级缩短至秒级，从容应对促销、突发流量等业务高峰。</p><h4>跨可用区高可用</h4><p>内置多可用区容灾能力，故障自动切换，服务可用性提升至 99.99%。</p><h4>智能成本优化</h4><p>提供用量分析与成本看板，结合自动缩容策略，平均可帮助企业节省约 25% 的云资源开支。</p>"
+      },
+      {
+        title: "大模型落地实践：企业智能客服的 5 个关键步骤",
+        date: "2026-09-15",
+        category: "技术洞察",
+        icon: "✦",
+        summary: "从数据准备到效果调优，拆解企业搭建大模型智能客服的完整链路，避免常见落地误区。",
+        content: "<p>智能客服已成为大模型在企业侧落地最广泛的场景之一。结合大量项目经验，我们总结出 5 个关键步骤。</p><h4>1. 知识库治理</h4><p>高质量的知识库是效果的前提，需完成文档清洗、去重与结构化。</p><h4>2. 场景定义</h4><p>明确售前咨询、售后答疑、工单分流等核心场景，分场景优化提示词。</p><h4>3. 检索增强</h4><p>通过 RAG 架构将企业私有知识与大模型结合，确保回答准确可溯源。</p><h4>4. 人机协同</h4><p>设置置信度阈值与人工兜底，复杂问题自动转接人工坐席。</p><h4>5. 持续优化</h4><p>建立会话日志分析闭环，定期评估并迭代模型与知识库。</p>"
+      },
+      {
+        title: "数据中台建设的三大常见误区",
+        date: "2026-08-30",
+        category: "行业洞察",
+        icon: "◈",
+        summary: "重平台轻应用、重建设轻运营、重技术轻业务——盘点企业数据中台建设最常踩的坑。",
+        content: "<p>数据中台不是终点，而是支撑业务决策的起点。很多企业在建设中容易走入误区。</p><h4>误区一：重平台轻应用</h4><p>投入大量资源搭建平台，却缺少可落地的数据应用，最终中台沦为摆设。</p><h4>误区二：重建设轻运营</h4><p>数据资产需要持续运营，包括质量监控、口径统一与使用推广。</p><h4>误区三：重技术轻业务</h4><p>脱离业务场景的数据建设难以产生价值，应坚持业务驱动、价值导向。</p>"
+      },
+      {
+        title: "NexAI 获评年度最佳人工智能平台",
+        date: "2026-08-12",
+        category: "公司新闻",
+        icon: "★",
+        summary: "在年度企业服务评选中，NexAI 智能平台凭借低门槛、高可用与丰富场景模板获评最佳。",
+        content: "<p>近日，NexAI 智能平台在年度企业服务行业评选中荣获「年度最佳人工智能平台」奖项。</p><p>评审委员会认为，NexAI 在易用性、场景覆盖与安全合规方面的综合表现突出，尤其降低了中小企业应用大模型的门槛，具有显著示范效应。</p><p>NexCore 将持续加大 AI 研发投入，推动更多行业智能化落地。</p>"
+      },
+      {
+        title: "从 IaaS 到 SaaS：企业上云的演进路线图",
+        date: "2026-07-20",
+        category: "技术洞察",
+        icon: "⌁",
+        summary: "梳理企业上云的三阶段演进路径，帮助 CIO 制定清晰、稳妥的云化战略。",
+        content: "<p>企业上云并非一步到位，分阶段演进是更稳妥的路径。</p><h4>第一阶段：基础设施云化</h4><p>通过云主机、对象存储与负载均衡等 IaaS 服务完成基础设施替换，降低硬件成本。</p><h4>第二阶段：平台服务化</h4><p>采用数据库、容器与中间件等 PaaS 能力，提升交付效率与运维自动化水平。</p><h4>第三阶段：业务 SaaS 化</h4><p>将业务能力产品化，结合 AI 与数据服务构建新增长引擎。</p>"
+      },
+      {
+        title: "安全月报：2026 上半年云安全趋势盘点",
+        date: "2026-06-25",
+        category: "安全专题",
+        icon: "🛡",
+        summary: "勒索攻击、供应链风险与 AI 滥用成为上半年云安全三大焦点，企业应如何应对？",
+        content: "<p>2026 上半年，云安全形势依然严峻，三大趋势值得关注。</p><h4>勒索攻击产业化</h4><p>攻击手法从单点爆破转向深度渗透，备份与恢复策略成为关键防线。</p><h4>供应链风险上升</h4><p>开源组件漏洞利用增多，建议建立软件物料清单与持续漏洞监测机制。</p><h4>AI 滥用风险</h4><p>深度伪造与自动化攻击工具泛滥，需加强身份认证与内容鉴权。</p>"
+      }
+    ];
+
+    var blogGrid = document.getElementById("blogGrid");
+    var modal = document.getElementById("articleModal");
+    var articleTitle = document.getElementById("articleTitle");
+    var articleMeta = document.getElementById("articleMeta");
+    var articleBody = document.getElementById("articleBody");
+
+    function escHtml(str) {
+      return String(str == null ? "" : str)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    blogGrid.innerHTML = POSTS.map(function (p, i) {
+      return (
+        '<article class="blog-card">' +
+        '<div class="blog-cover">' + p.icon + "</div>" +
+        '<div class="blog-body">' +
+        '<div class="blog-meta"><span>' + escHtml(p.category) + "</span><span>" + escHtml(p.date) + "</span></div>" +
+        "<h3>" + escHtml(p.title) + "</h3>" +
+        "<p>" + escHtml(p.summary) + "</p>" +
+        '<a href="javascript:void(0)" class="read-more" data-index="' + i + '">阅读全文 →</a>' +
+        "</div></article>"
+      );
+    }).join("");
+
+    blogGrid.addEventListener("click", function (e) {
+      var link = e.target.closest(".read-more");
+      if (!link) return;
+      var post = POSTS[parseInt(link.getAttribute("data-index"), 10)];
+      if (!post) return;
+      articleTitle.textContent = post.title;
+      articleMeta.textContent = post.category + " · " + post.date;
+      articleBody.innerHTML = post.content;
+      modal.classList.add("show");
+    });
+
+    document.getElementById("articleCloseBtn").addEventListener("click", function () {
+      modal.classList.remove("show");
+    });
+
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) modal.classList.remove("show");
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

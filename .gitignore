@@ -1,0 +1,22 @@
+# 忽略操作系统 / 编辑器 / 本地工具产生的杂项文件
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log
+*.tmp
+*.swp
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.iml
+
+# 依赖与构建（本静态站无需，预留）
+node_modules/
+dist/
+build/
+
+# 敏感配置（示例密钥请勿提交）
+js/dns-config.local.js
+.env
+.env.*

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="联系 NexCore 科技 - 联系方式、地址、咨询表单" />
+  <title>联系我们 - NexCore 科技</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">N</span>
+        <span>NexCore 科技</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="about.html">关于我们</a>
+        <a href="products.html">产品服务</a>
+        <a href="cases.html">客户案例</a>
+        <a href="pricing.html">价格方案</a>
+        <a href="team.html">团队团队</a>
+        <a href="blog.html">新闻动态</a>
+        <a href="faq.html">常见问题</a>
+        <a href="contact.html">联系我们</a>
+        <a href="dns.html">域名管理</a>
+      </nav>
+      <button class="nav-toggle" aria-label="切换导航菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 页头横幅 -->
+  <section class="hero" style="padding: 64px 0;">
+    <div class="container">
+      <div class="hero-content" style="text-align:center; margin: 0 auto; max-width: 760px;">
+        <span class="tagline">GET IN TOUCH</span>
+        <h1>联系我们</h1>
+        <p>无论是产品咨询、方案定制还是商务合作，我们随时恭候您的垂询。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系信息 + 表单 -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-item">
+            <span class="ii-icon">⌖</span>
+            <div>
+              <strong>公司地址</strong>
+              <span>广东省深圳市南山区科技园南路 NexCore 大厦 18 层（邮编 518057）</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="ii-icon">✆</span>
+            <div>
+              <strong>服务热线</strong>
+              <span>400-888-8888（周一至周五 9:00 - 18:00）</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="ii-icon">✉</span>
+            <div>
+              <strong>商务邮箱</strong>
+              <span>contact@nexcore.example.com</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="ii-icon">◎</span>
+            <div>
+              <strong>工作时间</strong>
+              <span>周一至周五 9:00 - 18:00 · 技术问题 7×24 小时响应</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-success">提交成功！我们已收到您的留言，将在 1 个工作日内与您联系。</div>
+
+          <div class="form-group">
+            <label for="name">您的姓名 <span class="required">*</span></label>
+            <input type="text" id="name" name="name" placeholder="请输入您的姓名" autocomplete="name" />
+            <span class="form-error">姓名至少需要 2 个字符</span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">电子邮箱 <span class="required">*</span></label>
+            <input type="email" id="email" name="email" placeholder="name@example.com" autocomplete="email" />
+            <span class="form-error">请输入有效的邮箱地址</span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">联系电话</label>
+            <input type="tel" id="phone" name="phone" placeholder="选填，如 138-0000-0000" autocomplete="tel" />
+            <span class="form-error">请输入有效的联系电话（7~15 位数字）</span>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">咨询主题 <span class="required">*</span></label>
+            <select id="subject" name="subject">
+              <option value="">请选择咨询主题</option>
+              <option value="cloud">NexCloud 云平台</option>
+              <option value="ai">NexAI 人工智能</option>
+              <option value="data">NexData 数据智能</option>
+              <option value="consulting">数字化咨询</option>
+              <option value="cooperation">商务合作</option>
+              <option value="other">其他</option>
+            </select>
+            <span class="form-error">请选择咨询主题</span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">留言内容 <span class="required">*</span></label>
+            <textarea id="message" name="message" placeholder="请简要描述您的需求，不少于 5 个字符"></textarea>
+            <span class="form-error">留言内容至少需要 5 个字符</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;">提交留言</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>希望了解更多产品细节？</h2>
+      <p>浏览我们的产品服务页面，查看完整解决方案矩阵。</p>
+      <a href="products.html" class="btn btn-primary">查看产品服务</a>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo" style="color:#fff;">
+            <span class="logo-icon">N</span>
+            <span>NexCore 科技</span>
+          </a>
+          <p style="margin-top:14px;">让科技驱动未来。NexCore 科技致力于通过云计算、人工智能与数据智能技术，帮助企业实现数字化转型升级。</p>
+        </div>
+        <div class="footer-col">
+          <h4>快速导航</h4>
+          <a href="index.html">首页</a>
+          <a href="about.html">关于我们</a>
+          <a href="products.html">产品服务</a>
+          <a href="cases.html">客户案例</a>
+          <a href="pricing.html">价格方案</a>
+          <a href="team.html">团队团队</a>
+          <a href="blog.html">新闻动态</a>
+          <a href="faq.html">常见问题</a>
+          <a href="contact.html">联系我们</a>
+          <a href="dns.html">域名管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>产品服务</h4>
+          <a href="products.html">NexCloud 云平台</a>
+          <a href="products.html">NexAI 智能平台</a>
+          <a href="products.html">NexData 数据中台</a>
+          <a href="products.html">企业数字化咨询</a>
+        </div>
+        <div class="footer-col">
+          <h4>联系方式</h4>
+          <a href="contact.html">深圳市南山区科技园 NexCore 大厦</a>
+          <a href="contact.html">400-888-8888</a>
+          <a href="contact.html">contact@nexcore.example.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="currentYear">2026</span> NexCore 科技（示例站点）。保留所有权利。
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-top" aria-label="返回顶部">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
