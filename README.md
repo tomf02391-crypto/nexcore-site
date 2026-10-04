@@ -9,9 +9,9 @@ AIGC:
     ReservedCode2: gRYaiX5VCS47a70BkUxrC7/eqc6kDO1SIfOQFkmkydZhGsuHD/tMMHwFwjW7sdCjeBQj+uenB1LU9QZsEtqc/CgRWOggLY7/w91603Jxftkr9wAWZJIBdu4sQ6KdOd5GFmb6MArlo5mNtFQ53uOnfk1CzTI0kYu0y9Oirk9ZyRJEpyNlCmE7EkVzKps=
 ---
 
-# NexCore 科技 · 静态官网
+# 星枢科技 · 静态官网
 
-NexCore 科技企业展示静态官网，纯 HTML / CSS / JavaScript 实现，无框架依赖，可直接浏览器打开或部署到任意静态托管平台。
+星枢科技企业展示静态官网，纯 HTML / CSS / JavaScript 实现，无框架依赖，可直接浏览器打开或部署到任意静态托管平台。
 
 ## 站点结构
 
