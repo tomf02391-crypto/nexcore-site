@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DNSHE 域名管理后台 - 域名列表与解析记录管理" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api005.dnshe.com; base-uri 'self'; form-action 'self'" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="DNSHE 域名管理后台（管理功能页，不公开索引） - 域名列表与解析记录管理" />
   <title>域名管理 - 星枢科技 XINGSHU TECH</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
@@ -23,7 +28,7 @@
         <a href="products.html">产品服务</a>
         <a href="cases.html">客户案例</a>
         <a href="pricing.html">价格方案</a>
-        <a href="team.html">团队团队</a>
+        <a href="team.html">团队</a>
         <a href="blog.html">新闻动态</a>
         <a href="faq.html">常见问题</a>
         <a href="contact.html">联系我们</a>
@@ -43,7 +48,7 @@
       <div class="hero-content" style="text-align:center; margin: 0 auto; max-width: 760px;">
         <span class="tagline">DNSHE DOMAIN HUB</span>
         <h1>域名管理后台</h1>
-        <p>基于 DNSHE v2.0 API 的免费域名管理面板，支持域名列表查看与解析记录维护。</p>
+        <p>基于 DNSHE v2.0 API 的域名管理面板（管理功能页，已屏蔽搜索引擎索引）。输入并保存 API 密钥后，可查看域名列表、管理解析记录、查询配额与 WHOIS 信息。</p>
       </div>
     </div>
   </section>
@@ -60,16 +65,15 @@
         <div class="panel-head">
           <div>
             <h2>API 密钥配置</h2>
-            <div class="panel-sub">已预填默认密钥，可在此修改后保存（存储于浏览器 localStorage）</div>
+            <div class="panel-sub">密钥不预填，输入后仅保存于本机浏览器 localStorage；页面关闭后下次打开自动读取</div>
           </div>
-          <span class="badge badge-ok" id="configState">已使用预填密钥</span>
+          <span class="badge badge-warn" id="configState">未配置密钥</span>
         </div>
 
         <div class="security-tip">
           <span class="tip-icon">⚠</span>
           <div>
-            <strong>安全提示：</strong>API 密钥等同于账户访问凭证，保存于浏览器 localStorage 仅供本机使用。
-            请勿将本页面部署到公开环境或将密钥提交到代码仓库；如密钥泄露，请及时在 DNSHE 控制台重置。
+            <strong>安全提示：</strong>API 密钥等同于账户访问凭证。本页面<strong>不预填任何密钥</strong>，密钥仅保存在本机浏览器的 localStorage 中，请勿在公共电脑上保存；切勿将密钥提交到代码仓库或在公开环境部署本页面。如密钥泄露，请及时在 DNSHE 控制台重置。
           </div>
         </div>
 
@@ -90,7 +94,7 @@
 
         <div class="config-actions">
           <button class="btn btn-primary btn-sm" id="saveConfigBtn" type="button">保存配置</button>
-          <button class="btn btn-secondary btn-sm" id="resetConfigBtn" type="button">恢复默认密钥</button>
+          <button class="btn btn-secondary btn-sm" id="resetConfigBtn" type="button">清除本地密钥</button>
           <button class="btn btn-outline btn-sm" id="toggleSecretBtn" type="button" style="color: var(--gray-600); border-color: var(--gray-400);">显示密钥</button>
         </div>
       </div>
@@ -132,7 +136,7 @@
         <div class="panel-head">
           <div>
             <h2>解析记录</h2>
-            <div class="panel-sub">选择上方域名后，可查看 / 搜索 / 新增 / 批量删除 / 编辑 TTL 解析记录</div>
+            <div class="panel-sub">选择上方域名后，可查看 / 搜索 / 新增 / 编辑 / 批量删除 / 修改 TTL 解析记录</div>
           </div>
         </div>
         <div class="toolbar">
@@ -173,10 +177,10 @@
         </div>
       </div>
 
-      <!-- 新增记录表单（内联） -->
+      <!-- 新增/编辑记录表单（内联） -->
       <div class="dns-panel" id="addRecordPanel" style="display:none;">
         <div class="panel-head">
-          <h2>新增解析记录</h2>
+          <h2 id="addRecordTitle">新增解析记录</h2>
           <span class="panel-sub" id="addRecordTarget">—</span>
         </div>
         <div class="config-grid">
@@ -210,6 +214,67 @@
         </div>
       </div>
 
+      <!-- 密钥管理（keys list） -->
+      <div class="dns-panel">
+        <div class="panel-head">
+          <div>
+            <h2>密钥管理</h2>
+            <div class="panel-sub">当前账户可用的 API 密钥列表（keys list）</div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="keysRefreshBtn" type="button">刷新密钥</button>
+        </div>
+        <div class="dns-table-wrap">
+          <table class="dns-table" id="keysTable">
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>密钥 ID</th>
+                <th>权限范围</th>
+                <th>状态</th>
+                <th>创建时间</th>
+              </tr>
+            </thead>
+            <tbody id="keysBody">
+              <tr class="empty-row"><td colspan="5">点击「刷新密钥」加载数据</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 配额查询（quota） -->
+      <div class="dns-panel">
+        <div class="panel-head">
+          <div>
+            <h2>配额查询</h2>
+            <div class="panel-sub">当前账户的域名与记录配额使用情况（quota）</div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="quotaRefreshBtn" type="button">查询配额</button>
+        </div>
+        <div id="quotaBox" class="quota-box">
+          <p class="muted">点击「查询配额」加载数据</p>
+        </div>
+      </div>
+
+      <!-- WHOIS 查询 -->
+      <div class="dns-panel">
+        <div class="panel-head">
+          <div>
+            <h2>WHOIS 查询</h2>
+            <div class="panel-sub">查询域名注册信息（whois）</div>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="search-box" style="flex:1;">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="whoisDomainInput" placeholder="输入域名，如 example.com" />
+          </div>
+          <button class="btn btn-primary btn-sm" id="whoisBtn" type="button">查询 WHOIS</button>
+        </div>
+        <div id="whoisBox" class="whois-box">
+          <p class="muted">输入域名后点击「查询 WHOIS」查看注册信息</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -231,7 +296,7 @@
           <a href="products.html">产品服务</a>
           <a href="cases.html">客户案例</a>
           <a href="pricing.html">价格方案</a>
-          <a href="team.html">团队团队</a>
+          <a href="team.html">团队</a>
           <a href="blog.html">新闻动态</a>
           <a href="faq.html">常见问题</a>
           <a href="contact.html">联系我们</a>
@@ -239,9 +304,9 @@
         </div>
         <div class="footer-col">
           <h4>产品服务</h4>
-          <a href="products.html">NexCloud 云平台</a>
-          <a href="products.html">NexAI 智能平台</a>
-          <a href="products.html">NexData 数据中台</a>
+          <a href="products.html">星枢云平台</a>
+          <a href="products.html">星枢 AI 智能平台</a>
+          <a href="products.html">星枢数据中台</a>
           <a href="products.html">企业数字化咨询</a>
         </div>
         <div class="footer-col">
@@ -250,6 +315,7 @@
           <a href="https://t.me/xingshu_tech" target="_blank" rel="noopener">Telegram 频道 @xingshu_tech</a>
           <a href="https://t.me/xingshu_chat" target="_blank" rel="noopener">Telegram 群组 @xingshu_chat</a>
           <a href="https://t.me/xingshu_support" target="_blank" rel="noopener">Telegram 客服 @xingshu_support</a>
+          <div class="footer-mail">邮箱：敬请期待</div>
         </div>
       </div>
       <div class="footer-bottom">

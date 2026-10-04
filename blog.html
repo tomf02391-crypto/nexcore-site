@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api005.dnshe.com; base-uri 'self'; form-action 'self'" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
   <meta name="description" content="星枢科技 XINGSHU TECH新闻与博客 - 行业洞察、产品动态与技术分享" />
   <title>新闻动态 - 星枢科技 XINGSHU TECH</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -23,7 +27,7 @@
         <a href="products.html">产品服务</a>
         <a href="cases.html">客户案例</a>
         <a href="pricing.html">价格方案</a>
-        <a href="team.html">团队团队</a>
+        <a href="team.html">团队</a>
         <a href="blog.html">新闻动态</a>
         <a href="faq.html">常见问题</a>
         <a href="contact.html">联系我们</a>
@@ -73,7 +77,7 @@
           <a href="products.html">产品服务</a>
           <a href="cases.html">客户案例</a>
           <a href="pricing.html">价格方案</a>
-          <a href="team.html">团队团队</a>
+          <a href="team.html">团队</a>
           <a href="blog.html">新闻动态</a>
           <a href="faq.html">常见问题</a>
           <a href="contact.html">联系我们</a>
@@ -81,9 +85,9 @@
         </div>
         <div class="footer-col">
           <h4>产品服务</h4>
-          <a href="products.html">NexCloud 云平台</a>
-          <a href="products.html">NexAI 智能平台</a>
-          <a href="products.html">NexData 数据中台</a>
+          <a href="products.html">星枢云平台</a>
+          <a href="products.html">星枢 AI 智能平台</a>
+          <a href="products.html">星枢数据中台</a>
           <a href="products.html">企业数字化咨询</a>
         </div>
         <div class="footer-col">
@@ -92,6 +96,7 @@
           <a href="https://t.me/xingshu_tech" target="_blank" rel="noopener">Telegram 频道 @xingshu_tech</a>
           <a href="https://t.me/xingshu_chat" target="_blank" rel="noopener">Telegram 群组 @xingshu_chat</a>
           <a href="https://t.me/xingshu_support" target="_blank" rel="noopener">Telegram 客服 @xingshu_support</a>
+          <div class="footer-mail">邮箱：敬请期待</div>
         </div>
       </div>
       <div class="footer-bottom">
@@ -118,12 +123,12 @@
     /* ---------- 博客文章数据（示例内容） ---------- */
     var POSTS = [
       {
-        title: "NexCloud 3.0 正式发布：更弹性的企业云底座",
+        title: "星枢云平台能力更新：更弹性的企业云底座（示例）",
         date: "2026-09-28",
         category: "产品动态",
         icon: "☁",
         summary: "新一代云平台带来秒级弹性伸缩、跨可用区高可用与智能成本优化，帮助企业以更优成本支撑业务增长。",
-        content: "<p>经过数月研发与灰度验证，NexCloud 3.0 于今日正式发布。新版本围绕弹性、可靠与成本三个维度进行了全面升级。</p><h4>秒级弹性伸缩</h4><p>基于全新的调度引擎，计算资源扩容时间从分钟级缩短至秒级，从容应对促销、突发流量等业务高峰。</p><h4>跨可用区高可用</h4><p>内置多可用区容灾能力，故障自动切换，服务可用性提升至 99.99%。</p><h4>智能成本优化</h4><p>提供用量分析与成本看板，结合自动缩容策略，平均可帮助企业节省约 25% 的云资源开支。</p>"
+        content: "<p>星枢云平台持续围绕弹性、可靠与成本三个维度进行能力升级（以下为示例说明）。</p><h4>秒级弹性伸缩</h4><p>基于高效的调度引擎，计算资源扩容可从分钟级缩短至秒级，从容应对促销、突发流量等业务高峰。</p><h4>跨可用区高可用</h4><p>内置多可用区容灾能力，故障自动切换，保障服务可用性。</p><h4>智能成本优化</h4><p>提供用量分析与成本看板，结合自动缩容策略，帮助优化云资源开支。</p>"
       },
       {
         title: "大模型落地实践：企业智能客服的 5 个关键步骤",
@@ -142,12 +147,12 @@
         content: "<p>数据中台不是终点，而是支撑业务决策的起点。很多企业在建设中容易走入误区。</p><h4>误区一：重平台轻应用</h4><p>投入大量资源搭建平台，却缺少可落地的数据应用，最终中台沦为摆设。</p><h4>误区二：重建设轻运营</h4><p>数据资产需要持续运营，包括质量监控、口径统一与使用推广。</p><h4>误区三：重技术轻业务</h4><p>脱离业务场景的数据建设难以产生价值，应坚持业务驱动、价值导向。</p>"
       },
       {
-        title: "NexAI 获评年度最佳人工智能平台",
+        title: "星枢 AI 平台实践：企业大模型应用的落地路径（示例）",
         date: "2026-08-12",
-        category: "公司新闻",
+        category: "技术洞察",
         icon: "★",
-        summary: "在年度企业服务评选中，NexAI 智能平台凭借低门槛、高可用与丰富场景模板获评最佳。",
-        content: "<p>近日，NexAI 智能平台在年度企业服务行业评选中荣获「年度最佳人工智能平台」奖项。</p><p>评审委员会认为，NexAI 在易用性、场景覆盖与安全合规方面的综合表现突出，尤其降低了中小企业应用大模型的门槛，具有显著示范效应。</p><p>XINGSHU TECH 将持续加大 AI 研发投入，推动更多行业智能化落地。</p>"
+        summary: "从场景评估到效果迭代，梳理企业将大模型能力融入业务的关键路径与注意事项。",
+        content: "<p>大模型在企业侧的落地需要结合真实场景循序渐进，本文为示例性方法总结。</p><h4>1. 场景评估</h4><p>从高频、重复、知识密集型环节切入，优先选择效果可度量、反馈周期短的场景。</p><h4>2. 知识治理</h4><p>对业务知识进行清洗、去重与结构化，为检索增强提供高质量底座。</p><h4>3. 安全合规</h4><p>建立数据脱敏、权限隔离与输出审计机制，确保内容可信可控。</p><h4>4. 迭代运营</h4><p>通过日志分析与人工抽检持续优化提示词与模型效果。</p>"
       },
       {
         title: "从 IaaS 到 SaaS：企业上云的演进路线图",

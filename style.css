@@ -1707,3 +1707,80 @@ ul {
   gap: 8px;
   flex-wrap: wrap;
 }
+
+/* ---------- DNS 管理页：配额 / WHOIS / 通用 ---------- */
+.muted { color: var(--gray-400); font-size: 0.9rem; }
+
+.quota-box, .whois-box {
+  padding: 4px 0;
+}
+
+.quota-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.quota-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-100);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.quota-item.quota-warn {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.quota-label {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+}
+
+.quota-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.whois-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.whois-item {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px dashed var(--gray-100);
+  padding: 8px 0;
+  font-size: 0.9rem;
+}
+
+.whois-label {
+  min-width: 110px;
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+
+.whois-value {
+  color: var(--dark);
+  word-break: break-all;
+}
+
+.json-pre {
+  background: #f8fafc;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #334155;
+}

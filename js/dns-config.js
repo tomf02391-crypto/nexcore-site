@@ -1,6 +1,6 @@
 /* =========================================================
    DNSHE 域名管理 - 密钥配置模块
-   预填密钥 + 页面内可改 + localStorage 覆盖 + 安全提示
+   密钥由用户在页面自行输入，仅保存在浏览器 localStorage
    ========================================================= */
 (function (window) {
   "use strict";
@@ -9,15 +9,20 @@
 
   /* ---------- 默认预填配置（首次使用） ---------- */
   var DEFAULT_CONFIG = {
-    apiKey: "63fcb7dfc9e849312b358f31b0431dc7012c9e31bd96d3cc400ae548907be5d2",
-    apiSecret: "cfsd_b84226862a7e96a1063b9def7acb5c33",
+    // 密钥不预填，由用户在使用页面时自行输入（仅存 localStorage）
+    apiKey: "",
+    apiSecret: "",
     baseUrl: "https://api005.dnshe.com/index.php?m=domain_hub",
     // 端点 action 名称（如与实际 API 不符可在此调整）
     endpoints: {
-      subdomains: "subdomains",          // 域名列表
-      dns_records: "dns_records",        // 解析记录列表（需传 domain）
+      subdomains: "subdomains",          // 子域/域名列表
+      dns_records: "dns_records",        // 解析记录列表（需传 subdomain_id / domain）
       add_record: "add_dns_record",      // 新增解析记录
-      delete_record: "delete_dns_record" // 删除解析记录（需传 record id）
+      update_record: "update_dns_record",// 更新解析记录（需传 record id）
+      delete_record: "delete_dns_record",// 删除解析记录（需传 record id）
+      keys: "keys",                      // 密钥列表
+      quota: "quota",                    // 配额查询
+      whois: "whois"                     // WHOIS 查询
     }
   };
 
@@ -63,7 +68,7 @@
     }
   }
 
-  /* ---------- 重置为默认预填配置 ---------- */
+  /* ---------- 重置：清除本地保存的密钥配置 ---------- */
   function resetConfig() {
     try {
       window.localStorage.removeItem(STORAGE_KEY);
@@ -71,13 +76,10 @@
     return mergeConfig(DEFAULT_CONFIG);
   }
 
-  /* ---------- 是否使用了预填密钥 ---------- */
-  function isUsingDefault() {
+  /* ---------- 是否已配置密钥 ---------- */
+  function hasCredentials() {
     var cfg = loadConfig();
-    return (
-      cfg.apiKey === DEFAULT_CONFIG.apiKey &&
-      cfg.apiSecret === DEFAULT_CONFIG.apiSecret
-    );
+    return !!(cfg.apiKey && cfg.apiSecret);
   }
 
   window.DNSHE_CONFIG = {
@@ -86,6 +88,6 @@
     load: loadConfig,
     save: saveConfig,
     reset: resetConfig,
-    isUsingDefault: isUsingDefault
+    hasCredentials: hasCredentials
   };
 })(window);

@@ -154,8 +154,43 @@
       }
     );
 
+    /* 输入清洗：剥离可能用于脚本注入的控制字符，逐字段处理并回写 */
+    function sanitizeField(input) {
+      if (!input) return "";
+      var raw = input.value.trim();
+      var cleaned = raw.replace(/[<>\\]/g, "").replace(/[\u0000-\u001f\u007f]/g, "");
+      if (cleaned !== raw) {
+        input.value = cleaned;
+        setInvalid(input, true);
+        return "";
+      }
+      return cleaned;
+    }
+
+    function hasInjectionRisk() {
+      var fields = [nameInput, emailInput, phoneInput, subjectInput, messageInput];
+      var risky = fields.some(function (input) {
+        return input && /[<>\\]/.test(input.value);
+      });
+      if (risky) {
+        fields.forEach(function (input) {
+          if (input && /[<>\\]/.test(input.value)) setInvalid(input, true);
+        });
+      }
+      return risky;
+    }
+
     contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      if (hasInjectionRisk()) {
+        return;
+      }
+      sanitizeField(nameInput);
+      sanitizeField(subjectInput);
+      sanitizeField(messageInput);
+      sanitizeField(emailInput);
+      sanitizeField(phoneInput);
 
       var checks = [
         validateName(),

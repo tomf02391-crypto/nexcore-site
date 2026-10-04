@@ -46,6 +46,12 @@
   // 错误态容器（可选：页面存在则使用，否则回退 msgBox）
   var errState = document.getElementById("dnsErrorState");
 
+  // 密钥管理 / 配额 / WHOIS / 新增编辑标题
+  var keysBody = document.getElementById("keysBody");
+  var quotaBox = document.getElementById("quotaBox");
+  var whoisBox = document.getElementById("whoisBox");
+  var addRecordTitle = document.getElementById("addRecordTitle");
+
   /* ---------- 消息提示 ---------- */
   function showMsg(text, type) {
     msgBox.textContent = text;
@@ -71,11 +77,11 @@
   }
 
   function updateConfigState() {
-    if (DNSHE_CONFIG.isUsingDefault()) {
-      configState.textContent = "已使用预填密钥";
+    if (DNSHE_CONFIG.hasCredentials()) {
+      configState.textContent = "已配置密钥";
       configState.className = "badge badge-ok";
     } else {
-      configState.textContent = "已使用自定义密钥";
+      configState.textContent = "未配置密钥";
       configState.className = "badge badge-warn";
     }
   }
@@ -106,12 +112,12 @@
   }
 
   function resetConfigForm() {
-    if (!window.confirm("确定恢复默认预填密钥吗？自定义配置将被清除。")) {
+    if (!window.confirm("确定清除已保存的密钥吗？清除后需重新输入。")) {
       return;
     }
     cfg = DNSHE_CONFIG.reset();
     fillConfigForm();
-    showMsg("已恢复默认预填密钥。");
+    showMsg("已清除本地保存的密钥。");
   }
 
   function toggleSecretVisibility() {
@@ -153,6 +159,13 @@
         var err = new Error(errMsg);
         err.data = data;
         return Promise.reject(err);
+      })
+      .catch(function (err) {
+        if (err && err.data) {
+          throw err;
+        }
+        var detail = (err && err.message) ? err.message : "网络错误";
+        throw new Error("请求失败：" + detail + "。请检查密钥配置与网络连接（密钥仅通过 HTTPS 请求头发送，不会出现在日志中）。");
       });
   }
 
@@ -377,7 +390,8 @@
         "</td>" +
         "<td>" +
         (id
-          ? "<button class='btn btn-danger btn-sm' data-action='delete' data-index='" + globalIndex + "'>删除</button>"
+          ? "<button class='btn btn-outline btn-sm' data-action='edit' data-index='" + globalIndex + "'>编辑</button> " +
+            "<button class='btn btn-danger btn-sm' data-action='delete' data-index='" + globalIndex + "'>删除</button>"
           : "<span style='color:var(--gray-400);font-size:0.8rem;'>无ID</span>") +
         "</td>" +
         "</tr>";
@@ -585,18 +599,47 @@
     tryNext();
   }
 
-  /* ---------- 新增记录 ---------- */
+  /* ---------- 新增 / 编辑记录 ---------- */
+  var pendingEditId = null;
+
   function openAddRecord() {
     if (!currentDomain) {
       showMsg("请先选择域名。", "error");
       return;
     }
+    pendingEditId = null;
+    addRecordTitle.textContent = "新增解析记录";
+    document.getElementById("submitRecordBtn").textContent = "新增记录";
+    document.getElementById("recType").value = "A";
+    document.getElementById("recName").value = "";
+    document.getElementById("recValue").value = "";
+    document.getElementById("recTtl").value = "600";
+    addRecordTarget.textContent = "目标域名：" + currentDomain;
+    addRecordPanel.style.display = "block";
+    addRecordPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function openEditRecord(index) {
+    var r = recordOf(_filteredRecords[index]);
+    var id = recIdOf(r);
+    if (!id) {
+      showMsg("该记录缺少记录 ID，无法编辑（请检查 API 返回字段）。", "error");
+      return;
+    }
+    pendingEditId = id;
+    addRecordTitle.textContent = "编辑解析记录（ID: " + id + "）";
+    document.getElementById("submitRecordBtn").textContent = "保存修改";
+    document.getElementById("recType").value = r.type || "A";
+    document.getElementById("recName").value = r.name || r.host || r.host_record || "@";
+    document.getElementById("recValue").value = r.value || r.content || r.target || r.address || r.data || "";
+    document.getElementById("recTtl").value = recTtlOf(r) || "600";
     addRecordTarget.textContent = "目标域名：" + currentDomain;
     addRecordPanel.style.display = "block";
     addRecordPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function closeAddRecord() {
+    pendingEditId = null;
     addRecordPanel.style.display = "none";
   }
 
@@ -614,15 +657,61 @@
       showMsg("记录值不能为空。", "error");
       return;
     }
+    if (!/^[a-zA-Z0-9@*._-]+$/.test(name)) {
+      showMsg("主机记录仅支持字母、数字、@、*、点、下划线、短横线。", "error");
+      return;
+    }
+    if (value.indexOf("<") !== -1 || value.indexOf(">") !== -1) {
+      showMsg("记录值包含非法字符（< 或 >），已拒绝提交。", "error");
+      return;
+    }
 
-    showMsg("正在新增解析记录...", "loading");
-    apiCall(cfg.endpoints.add_record, {
+    var common = {
       domain: currentDomain,
       type: type,
       name: name,
       value: value,
       ttl: ttl
-    })
+    };
+
+    if (pendingEditId) {
+      showMsg("正在更新解析记录...", "loading");
+      // 优先尝试常见 update 类接口；不同版本 API 动作名略有差异
+      var updateActions = ["update_dns_record", "edit_dns_record", "modify_dns_record", "update_record"];
+      var attempt = 0;
+      var lastErr = null;
+
+      function tryUpdateNext() {
+        if (attempt >= updateActions.length) {
+          showMsg("更新失败：" + (lastErr ? lastErr.message : "接口不支持在线修改记录，可删除后重新添加。"), "error");
+          return;
+        }
+        var action = updateActions[attempt++];
+        apiCall(action, {
+          domain: currentDomain,
+          record_id: pendingEditId,
+          type: type,
+          name: name,
+          value: value,
+          ttl: ttl
+        })
+          .then(function () {
+            hideMsg();
+            closeAddRecord();
+            showMsg("解析记录更新成功。");
+            return loadRecords();
+          })
+          .catch(function (err) {
+            lastErr = err;
+            tryUpdateNext();
+          });
+      }
+      tryUpdateNext();
+      return;
+    }
+
+    showMsg("正在新增解析记录...", "loading");
+    apiCall(cfg.endpoints.add_record, common)
       .then(function () {
         hideMsg();
         closeAddRecord();
@@ -632,6 +721,141 @@
       .catch(function (err) {
         showMsg("新增记录失败：" + err.message, "error");
       });
+  }
+
+  /* ---------- 密钥管理（keys list） ---------- */
+  function loadKeys() {
+    showMsg("正在加载密钥列表...", "loading");
+    apiCall(cfg.endpoints.keys, {})
+      .then(function (data) {
+        hideMsg();
+        renderKeys(extractList(data));
+      })
+      .catch(function (err) {
+        showMsg("加载密钥列表失败：" + err.message, "error");
+        renderKeys([]);
+      });
+  }
+
+  function renderKeys(list) {
+    if (!list || list.length === 0) {
+      keysBody.innerHTML = '<tr class="empty-row"><td colspan="5">未获取到密钥数据</td></tr>';
+      return;
+    }
+    var html = "";
+    list.forEach(function (item, index) {
+      var keyName = item.name || item.key_name || item.label || item.remark || "未命名密钥";
+      var keyId = item.id || item.key_id || item.key || item.api_key || "—";
+      var scopes = item.scopes || item.permissions || item.scope || item.actions || "—";
+      var status = item.status || item.state || (item.enabled === false ? "disabled" : (item.enabled === true ? "active" : null));
+      var created = item.created_at || item.create_time || item.created || null;
+      html +=
+        "<tr>" +
+        "<td>" + escHtml(keyName) + "</td>" +
+        "<td><code>" + escHtml(keyId) + "</code></td>" +
+        "<td>" + (typeof scopes === "object" ? escHtml(JSON.stringify(scopes)) : escHtml(scopes)) + "</td>" +
+        "<td>" + statusBadge(status) + "</td>" +
+        "<td>" + (created ? escHtml(created) : "—") + "</td>" +
+        "</tr>";
+    });
+    keysBody.innerHTML = html;
+  }
+
+  /* ---------- 配额查询（quota） ---------- */
+  function loadQuota() {
+    showMsg("正在查询账户配额...", "loading");
+    apiCall(cfg.endpoints.quota, {})
+      .then(function (data) {
+        hideMsg();
+        renderQuota(data);
+      })
+      .catch(function (err) {
+        showMsg("查询配额失败：" + err.message, "error");
+      });
+  }
+
+  function quotaPair(label, value, warn) {
+    return "<div class='quota-item" + (warn ? " quota-warn" : "") + "'><span class='quota-label'>" + label + "</span><span class='quota-value'>" + value + "</span></div>";
+  }
+
+  function renderQuota(data) {
+    if (!data) {
+      quotaBox.innerHTML = "<p>接口未返回配额数据。</p>";
+      return;
+    }
+    var d = data.data || data.result || data.quota || data;
+    var total = d.total || d.max_domains || d.domain_limit || d.total_quota;
+    var used = d.used || d.used_domains || d.domain_count || d.current_used;
+    var remain = d.remain || d.remaining || d.available || d.left;
+    if (total == null && used == null && remain == null && !(d.records_limit || d.records_used)) {
+      // 结构未知，展示原始 JSON（转义后）
+      quotaBox.innerHTML = "<pre class='json-pre'>" + escHtml(JSON.stringify(data, null, 2)) + "</pre>";
+      return;
+    }
+    var html = '<div class="quota-grid">';
+    html += quotaPair("总域名额度", total == null ? "—" : escHtml(total));
+    html += quotaPair("已用域名", used == null ? "—" : escHtml(used));
+    html += quotaPair("剩余域名", remain == null ? "—" : escHtml(remain), remain !== null && used !== null && total !== null && used >= total);
+    if (d.records_limit != null) html += quotaPair("单域记录上限", escHtml(d.records_limit));
+    if (d.records_used != null) html += quotaPair("已用记录数", escHtml(d.records_used));
+    if (d.dns_records_limit != null) html += quotaPair("DNS 记录上限", escHtml(d.dns_records_limit));
+    html += "</div>";
+    quotaBox.innerHTML = html;
+  }
+
+  /* ---------- WHOIS 查询（whois） ---------- */
+  function loadWhois() {
+    var domain = document.getElementById("whoisDomainInput").value.trim();
+    if (!domain) {
+      showMsg("请输入需要查询的域名。", "error");
+      return;
+    }
+    if (!/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(domain)) {
+      showMsg("域名格式不合法，仅支持字母、数字、点、短横线、下划线。", "error");
+      return;
+    }
+    showMsg("正在查询 " + domain + " 的 WHOIS 信息...", "loading");
+    apiCall(cfg.endpoints.whois, { domain: domain })
+      .then(function (data) {
+        hideMsg();
+        renderWhois(data);
+      })
+      .catch(function (err) {
+        showMsg("WHOIS 查询失败：" + err.message, "error");
+      });
+  }
+
+  function whoisPair(label, value) {
+    return "<div class='whois-item'><span class='whois-label'>" + label + "</span><span class='whois-value'>" + value + "</span></div>";
+  }
+
+  function renderWhois(data) {
+    if (!data) {
+      whoisBox.innerHTML = "<p>接口未返回 WHOIS 数据。</p>";
+      return;
+    }
+    var d = data.data || data.result || data.whois || data;
+    var fields = [
+      ["域名", d.domain || d.domain_name || d.name],
+      ["注册商", d.registrar || d.registrar_name || d.registrant_org],
+      ["注册机构", d.registrant || d.registrant_org],
+      ["注册时间", d.created || d.created_at || d.creation_date || d.registrar_registration_expiration_date],
+      ["到期时间", d.expires || d.expires_at || d.expiry_date || d.registrar_expiration_date],
+      ["更新时间", d.updated || d.updated_at || d.last_updated],
+      ["域名服务器", d.nameservers ? (typeof d.nameservers === "object" ? JSON.stringify(d.nameservers) : d.nameservers) : d.name_servers]
+    ];
+    var hasKnown = fields.some(function (f) { return f[1] != null; });
+    if (!hasKnown) {
+      whoisBox.innerHTML = "<pre class='json-pre'>" + escHtml(JSON.stringify(data, null, 2)) + "</pre>";
+      return;
+    }
+    var html = '<div class="whois-list">';
+    fields.forEach(function (f) {
+      if (f[1] != null && f[1] !== "") html += whoisPair(f[0], escHtml(f[1]));
+    });
+    if (d.raw_text || d.raw) html += whoisPair("原始数据", "<pre class='json-pre'>" + escHtml(String(d.raw_text || d.raw)) + "</pre>");
+    html += "</div>";
+    whoisBox.innerHTML = html;
   }
 
   /* ---------- 事件绑定 ---------- */
@@ -654,6 +878,12 @@
   document.getElementById("deleteCancelBtn").addEventListener("click", cancelDelete);
   document.getElementById("deleteConfirmBtn").addEventListener("click", confirmDelete);
   batchDeleteBtn.addEventListener("click", askBatchDelete);
+  document.getElementById("keysRefreshBtn").addEventListener("click", loadKeys);
+  document.getElementById("quotaRefreshBtn").addEventListener("click", loadQuota);
+  document.getElementById("whoisBtn").addEventListener("click", loadWhois);
+  document.getElementById("whoisDomainInput").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") loadWhois();
+  });
 
   // 域名搜索（输入即本地筛选；未加载时先触发加载）
   domainSearch.addEventListener("input", function () {
@@ -736,6 +966,8 @@
       askDelete(index);
     } else if (action === "save-ttl") {
       saveTtl(index);
+    } else if (action === "edit") {
+      openEditRecord(index);
     }
   });
 

@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api005.dnshe.com; base-uri 'self'; form-action 'self'" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
   <meta name="description" content="星枢科技 XINGSHU TECH客户案例 - 金融、制造、零售等行业数字化实践" />
   <title>客户案例 - 星枢科技 XINGSHU TECH</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -23,7 +27,7 @@
         <a href="products.html">产品服务</a>
         <a href="cases.html">客户案例</a>
         <a href="pricing.html">价格方案</a>
-        <a href="team.html">团队团队</a>
+        <a href="team.html">团队</a>
         <a href="blog.html">新闻动态</a>
         <a href="faq.html">常见问题</a>
         <a href="contact.html">联系我们</a>
@@ -49,36 +53,53 @@
   <!-- 案例列表 -->
   <section class="section">
     <div class="container">
+      <p class="muted" style="margin-bottom:28px;">以下为星枢科技可提供的典型应用场景示意（示例，非具体客户承诺）。</p>
       <div class="cards-grid">
         <div class="case-card">
           <div class="case-head">
-            <div class="case-logo">华</div>
+            <div class="case-logo">风</div>
             <div>
-              <h3>华宇银行</h3>
-              <div class="case-industry">金融行业 · 智能风控</div>
+              <h3>智能风控</h3>
+              <div class="case-industry">金融行业 · 示例场景</div>
             </div>
           </div>
-          <p class="case-desc">基于 NexAI 平台构建智能风控决策系统，整合多源数据，实现信贷审批与反欺诈的自动化、智能化。</p>
+          <p class="case-desc">基于星枢 AI 智能平台构建风控与反欺诈能力，整合多源数据，辅助信贷审批与异常交易识别。</p>
           <div class="case-stats">
-            <div class="case-stat"><div class="cs-num">60%</div><div class="cs-label">审批效率提升</div></div>
-            <div class="case-stat"><div class="cs-num">38%</div><div class="cs-label">欺诈识别提升</div></div>
-            <div class="case-stat"><div class="cs-num">7×24</div><div class="cs-label">自动风控值守</div></div>
+            <div class="case-stat"><div class="cs-num">实时</div><div class="cs-label">规则与模型协同</div></div>
+            <div class="case-stat"><div class="cs-num">多源</div><div class="cs-label">数据整合接入</div></div>
+            <div class="case-stat"><div class="cs-num">7×24</div><div class="cs-label">自动值守</div></div>
           </div>
         </div>
 
         <div class="case-card">
           <div class="case-head">
-            <div class="case-logo">联</div>
+            <div class="case-logo">检</div>
             <div>
-              <h3>联创制造</h3>
-              <div class="case-industry">智能制造 · 工业质检</div>
+              <h3>智能质检</h3>
+              <div class="case-industry">智能制造 · 示例场景</div>
             </div>
           </div>
-          <p class="case-desc">部署 NexVision 视觉引擎与边缘计算节点，在产线完成产品缺陷自动检测，替代人工抽检。</p>
+          <p class="case-desc">通过视觉识别与边缘计算能力，在生产线上实现产品缺陷自动检测，辅助替代人工抽检。</p>
           <div class="case-stats">
-            <div class="case-stat"><div class="cs-num">99.2%</div><div class="cs-label">检出准确率</div></div>
-            <div class="case-stat"><div class="cs-num">80%</div><div class="cs-label">人工成本降低</div></div>
-            <div class="case-stat"><div class="cs-num">50ms</div><div class="cs-label">单件检测耗时</div></div>
+            <div class="case-stat"><div class="cs-num">毫秒级</div><div class="cs-label">检测响应</div></div>
+            <div class="case-stat"><div class="cs-num">边缘</div><div class="cs-label">本地化部署</div></div>
+            <div class="case-stat"><div class="cs-num">持续</div><div class="cs-label">模型迭代优化</div></div>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-head">
+            <div class="case-logo">数</div>
+            <div>
+              <h3>数据中台</h3>
+              <div class="case-industry">零售电商 · 示例场景</div>
+            </div>
+          </div>
+          <p class="case-desc">基于星枢数据中台打通多平台业务数据，构建会员画像、库存协同与经营分析体系。</p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="cs-num">统一</div><div class="cs-label">数据口径</div></div>
+            <div class="case-stat"><div class="cs-num">实时</div><div class="cs-label">经营看板</div></div>
+            <div class="case-stat"><div class="cs-num">自助</div><div class="cs-label">分析取数</div></div>
           </div>
         </div>
 
@@ -86,69 +107,53 @@
           <div class="case-head">
             <div class="case-logo">云</div>
             <div>
-              <h3>云享零售</h3>
-              <div class="case-industry">新零售 · 数据中台</div>
+              <h3>业务上云</h3>
+              <div class="case-industry">医疗健康 · 示例场景</div>
             </div>
           </div>
-          <p class="case-desc">建设 NexData 数据中台，打通线上线下全渠道数据，构建会员画像与智能选品体系。</p>
+          <p class="case-desc">核心业务系统迁移至星枢云平台，实现多地业务统一纳管、弹性扩容与高可用保障。</p>
           <div class="case-stats">
-            <div class="case-stat"><div class="cs-num">32%</div><div class="cs-label">复购率提升</div></div>
-            <div class="case-stat"><div class="cs-num">15%</div><div class="cs-label">库存成本下降</div></div>
-            <div class="case-stat"><div class="cs-num">1200万</div><div class="cs-label">日处理订单</div></div>
+            <div class="case-stat"><div class="cs-num">高可用</div><div class="cs-label">容灾架构</div></div>
+            <div class="case-stat"><div class="cs-num">弹性</div><div class="cs-label">按需扩缩容</div></div>
+            <div class="case-stat"><div class="cs-num">统一</div><div class="cs-label">运维管控</div></div>
           </div>
         </div>
 
         <div class="case-card">
           <div class="case-head">
-            <div class="case-logo">医</div>
+            <div class="case-logo">物</div>
             <div>
-              <h3>康泰医疗</h3>
-              <div class="case-industry">医疗健康 · 云上系统</div>
+              <h3>物联网平台</h3>
+              <div class="case-industry">物流运输 · 示例场景</div>
             </div>
           </div>
-          <p class="case-desc">核心业务系统整体迁移至 NexCloud 云平台，实现多地院区业务统一、弹性扩容与高可用。</p>
+          <p class="case-desc">面向车辆与设备终端提供统一接入与管理能力，支持实时轨迹、状态监控与智能调度。</p>
           <div class="case-stats">
-            <div class="case-stat"><div class="cs-num">99.99%</div><div class="cs-label">系统可用性</div></div>
-            <div class="case-stat"><div class="cs-num">30%</div><div class="cs-label">IT 成本节约</div></div>
-            <div class="case-stat"><div class="cs-num">18</div><div class="cs-label">业务系统上云</div></div>
+            <div class="case-stat"><div class="cs-num">大规模</div><div class="cs-label">终端接入</div></div>
+            <div class="case-stat"><div class="cs-num">实时</div><div class="cs-label">状态监控</div></div>
+            <div class="case-stat"><div class="cs-num">智能</div><div class="cs-label">调度优化</div></div>
           </div>
         </div>
 
         <div class="case-card">
           <div class="case-head">
-            <div class="case-logo">速</div>
+            <div class="case-logo">智</div>
             <div>
-              <h3>速达物流</h3>
-              <div class="case-industry">物流运输 · IoT 平台</div>
+              <h3>智能服务</h3>
+              <div class="case-industry">在线教育 · 示例场景</div>
             </div>
           </div>
-          <p class="case-desc">基于 NexIoT 物联网平台接入数万台车辆终端，实现实时轨迹、温度监控与智能调度。</p>
+          <p class="case-desc">基于大模型能力构建智能问答与知识服务，辅助降低咨询响应成本、提升服务效率。</p>
           <div class="case-stats">
-            <div class="case-stat"><div class="cs-num">8万+</div><div class="cs-label">接入终端</div></div>
-            <div class="case-stat"><div class="cs-num">22%</div><div class="cs-label">调度效率提升</div></div>
-            <div class="case-stat"><div class="cs-num">99.5%</div><div class="cs-label">数据完整率</div></div>
-          </div>
-        </div>
-
-        <div class="case-card">
-          <div class="case-head">
-            <div class="case-logo">教</div>
-            <div>
-              <h3>启航教育</h3>
-              <div class="case-industry">在线教育 · 智能服务</div>
-            </div>
-          </div>
-          <p class="case-desc">搭建 NexBot 智能客服与学情分析系统，服务百万学员，大幅降低咨询响应成本。</p>
-          <div class="case-stats">
-            <div class="case-stat"><div class="cs-num">90%</div><div class="cs-label">咨询自动应答</div></div>
-            <div class="case-stat"><div class="cs-num">5s</div><div class="cs-label">平均响应时间</div></div>
-            <div class="case-stat"><div class="cs-num">40%</div><div class="cs-label">客服成本下降</div></div>
+            <div class="case-stat"><div class="cs-num">秒级</div><div class="cs-label">响应速度</div></div>
+            <div class="case-stat"><div class="cs-num">RAG</div><div class="cs-label">知识增强</div></div>
+            <div class="case-stat"><div class="cs-num">人机</div><div class="cs-label">协同兜底</div></div>
           </div>
         </div>
       </div>
 
       <div style="text-align:center; margin-top: 44px;">
-        <a href="contact.html" class="btn btn-primary">成为下一个成功案例</a>
+        <a href="contact.html" class="btn btn-primary">联系我们，探讨您的场景</a>
       </div>
     </div>
   </section>
@@ -171,7 +176,7 @@
           <a href="products.html">产品服务</a>
           <a href="cases.html">客户案例</a>
           <a href="pricing.html">价格方案</a>
-          <a href="team.html">团队团队</a>
+          <a href="team.html">团队</a>
           <a href="blog.html">新闻动态</a>
           <a href="faq.html">常见问题</a>
           <a href="contact.html">联系我们</a>
@@ -179,9 +184,9 @@
         </div>
         <div class="footer-col">
           <h4>产品服务</h4>
-          <a href="products.html">NexCloud 云平台</a>
-          <a href="products.html">NexAI 智能平台</a>
-          <a href="products.html">NexData 数据中台</a>
+          <a href="products.html">星枢云平台</a>
+          <a href="products.html">星枢 AI 智能平台</a>
+          <a href="products.html">星枢数据中台</a>
           <a href="products.html">企业数字化咨询</a>
         </div>
         <div class="footer-col">
@@ -190,6 +195,7 @@
           <a href="https://t.me/xingshu_tech" target="_blank" rel="noopener">Telegram 频道 @xingshu_tech</a>
           <a href="https://t.me/xingshu_chat" target="_blank" rel="noopener">Telegram 群组 @xingshu_chat</a>
           <a href="https://t.me/xingshu_support" target="_blank" rel="noopener">Telegram 客服 @xingshu_support</a>
+          <div class="footer-mail">邮箱：敬请期待</div>
         </div>
       </div>
       <div class="footer-bottom">
