@@ -1,230 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api005.dnshe.com; base-uri 'self'; form-action 'self'" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
-  <meta name="description" content="星枢科技 XINGSHU TECH - 领先的企业级云计算与人工智能解决方案提供商" />
-  <title>星枢科技 XINGSHU TECH - 让科技驱动未来</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#030814"><meta name="description" content="星枢科技 XINGSHU TECH——星辰之枢纽。在浩瀚数字星海中，连接产品、用户与服务，构建统一、开放、持续进化的数字生态。">
+<meta property="og:type" content="website"><meta property="og:title" content="星枢科技｜XINGSHU TECH"><meta property="og:description" content="星辰之枢纽 · 连接产品、用户与服务"><meta property="og:image" content="assets/og-cover.svg">
+<meta name="twitter:card" content="summary_large_image"><title>星枢科技｜XINGSHU TECH</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- 导航栏 -->
-  <header class="navbar">
-    <div class="container">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">X</span>
-        <span>星枢科技</span>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html">首页</a>
-        <a href="about.html">关于我们</a>
-        <a href="products.html">产品服务</a>
-        <a href="cases.html">客户案例</a>
-        <a href="pricing.html">价格方案</a>
-        <a href="team.html">团队</a>
-        <a href="blog.html">新闻动态</a>
-        <a href="faq.html">常见问题</a>
-        <a href="contact.html">联系我们</a>
-        <a href="dns.html">域名管理</a>
-      </nav>
-      <button class="nav-toggle" aria-label="切换导航菜单">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+<a class="skip-link" href="#main">跳转到主要内容</a>
+<header class="site-header" id="header">
+  <a class="brand" href="#home" aria-label="星枢科技首页"><img src="assets/logo.svg" alt=""><span><strong>星枢科技</strong><small>XINGSHU TECH</small></span></a>
+  <nav class="desktop-nav" aria-label="主导航"><a href="#home" class="nav-link active">首页</a><a href="#products" class="nav-link">产品</a><a href="#ecosystem" class="nav-link">生态</a><a href="#about" class="nav-link">关于星枢</a><a href="#community" class="nav-link">社区</a></nav>
+  <div class="header-actions"><a class="header-quiet" href="#community">社区入口</a><a class="button button-small button-blue" href="https://t.me/xingshu_tech" target="_blank" rel="noopener noreferrer">关注频道 <span>↗</span></a></div>
+  <button class="menu-toggle" aria-label="打开导航菜单" aria-expanded="false"><span></span><span></span></button>
+</header>
+<div class="mobile-nav" id="mobileNav"><a href="#home">首页</a><a href="#products">产品</a><a href="#ecosystem">生态</a><a href="#about">关于星枢</a><a href="#community">社区</a><a href="https://t.me/xingshu_tech" target="_blank" rel="noopener noreferrer">官方频道 ↗</a></div>
+<main id="main">
+<section class="hero" id="home">
+  <div class="hero-grid" aria-hidden="true"></div><div class="hero-stars" aria-hidden="true"></div><div class="aurora aurora-one"></div><div class="aurora aurora-two"></div>
+  <div class="hero-inner">
+    <div class="hero-content reveal">
+      <div class="eyebrow"><span class="eyebrow-line"></span> XINGSHU TECH <span class="eyebrow-dot"></span> DIGITAL ECOSYSTEM</div>
+      <h1>星辰之<span>枢纽</span><i>。</i></h1>
+      <p class="hero-lead">在浩瀚的数字星海中，搭建交汇、联通的核心节点。</p>
+      <p class="hero-sub">所有自研产品围绕星枢生长，连接用户、应用与服务，形成统一、开放、持续进化的数字生态。</p>
+      <div class="hero-actions"><a class="button button-blue" href="#products">探索星枢 <span>→</span></a><a class="button button-outline" href="#about">认识星枢 <span>↘</span></a></div>
+      <div class="hero-proof"><span class="proof-mark">✦</span><span>ONE CORE · OPEN ECOSYSTEM</span><span class="proof-divider"></span><span>为连接而生</span></div>
     </div>
-  </header>
-
-  <!-- Hero 区 -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <span class="tagline">企业级云智能解决方案</span>
-        <h1>让科技驱动<span>未来</span>增长</h1>
-        <p>星枢科技专注于云计算、人工智能与数据智能领域，为全球企业提供安全、高效、可扩展的数字化基础设施与智能应用。</p>
-        <div class="hero-btns">
-          <a href="contact.html" class="btn btn-primary">免费咨询</a>
-          <a href="products.html" class="btn btn-outline">了解产品</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="visual-card">
-          <span class="vc-icon">☁</span>
-          <div class="vc-text">
-            <strong>云基础设施</strong>
-            <span>弹性算力 · 高可用架构</span>
-          </div>
-        </div>
-        <div class="visual-card">
-          <span class="vc-icon">✦</span>
-          <div class="vc-text">
-            <strong>人工智能平台</strong>
-            <span>大模型 · 智能决策</span>
-          </div>
-        </div>
-        <div class="visual-card">
-          <span class="vc-icon">◈</span>
-          <div class="vc-text">
-            <strong>数据智能服务</strong>
-            <span>数据治理 · 实时分析</span>
-          </div>
-        </div>
-      </div>
+    <div class="cosmos" aria-label="星枢核心星体与轨道视觉">
+      <div class="cosmos-halo"></div><div class="planet planet-large"></div><div class="planet planet-small"></div>
+      <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="orbit orbit-d"></div>
+      <div class="core-beam"></div><div class="core-symbol"><img src="assets/logo-mark.svg" alt=""></div>
+      <span class="orbit-node node-a"></span><span class="orbit-node node-b"></span><span class="orbit-node node-c"></span><span class="orbit-node node-d"></span>
+      <div class="cosmos-label label-top"><span>01 / CORE NODE</span><b>核心枢纽</b></div><div class="cosmos-label label-bottom"><span>CONNECTED BY DESIGN</span><b>连接 · 生长 · 进化</b></div>
     </div>
-  </section>
+  </div>
+  <div class="hero-bottom"><span>SCROLL TO EXPLORE</span><span class="scroll-line"></span><span>01 — 05</span></div>
+</section>
 
-  <!-- 核心优势 -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="tag">CORE ADVANTAGES</span>
-        <h2>为什么选择 XINGSHU TECH</h2>
-        <p>以技术实力与客户成功为核心，构建值得信赖的企业数字化伙伴关系。</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <span class="fc-icon">⚙</span>
-          <h3>卓越性能</h3>
-          <p>基于新一代分布式架构，提供毫秒级响应与 99.99% 的高可用保障，满足企业核心业务严苛要求。</p>
-        </div>
-        <div class="feature-card">
-          <span class="fc-icon">🛡</span>
-          <h3>安全可信</h3>
-          <p>多重安全防护体系，数据加密、权限管控与等保合规，全面守护企业数据资产安全。</p>
-        </div>
-        <div class="feature-card">
-          <span class="fc-icon">↗</span>
-          <h3>弹性扩展</h3>
-          <p>从起步到规模化，按需弹性伸缩，支持业务高速增长，帮助企业在竞争中快人一步。</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="intro-strip"><div class="strip-label">OUR PRINCIPLE</div><p>让每一颗星，都找到自己的轨道。</p><span>CONNECT THE STARS <b>✦</b></span></section>
 
-  <!-- 数据统计 -->
-  <section class="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="num" data-target="3" data-suffix="">0</div>
-          <div class="label">核心产品线</div>
-        </div>
-        <div class="stat-item">
-          <div class="num" data-target="100" data-suffix="%">0%</div>
-          <div class="label">远程线上交付</div>
-        </div>
-        <div class="stat-item">
-          <div class="num" data-target="7" data-suffix="×24">0×24</div>
-          <div class="label">专业技术支持</div>
-        </div>
-        <div class="stat-item">
-          <div class="num" data-target="1" data-suffix="对1">0对1</div>
-          <div class="label">专属顾问对接</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="section section-products" id="products">
+  <div class="section-head reveal"><div><span class="eyebrow">BUILT AROUND THE CORE</span><h2>产品矩阵<span class="blue-dot">.</span></h2></div><p>从核心能力到实用工具，<br>让每一个想法都有落点。</p></div>
+  <div class="product-grid">
+    <article class="product-card product-featured reveal"><div class="product-card-top"><span class="product-icon icon-core">⌘</span><span class="product-index">PRODUCT / 01</span></div><div class="product-orbit-art" aria-hidden="true"><span></span><span></span><span></span></div><div class="product-card-copy"><span class="product-tag">CORE ENGINE</span><h3>星枢 · Orbit 星轨引擎</h3><p>面向自研产品的核心技术底座，为稳定运行与持续扩展提供基础能力。</p><a href="#community" class="text-link">了解产品动态 <span>↗</span></a></div></article>
+    <article class="product-card reveal"><div class="product-card-top"><span class="product-icon">⌬</span><span class="product-index">PRODUCT / 02</span></div><span class="product-tag">DEVELOPER TOOLS</span><h3>星枢工具链</h3><p>围绕开发流程打造的工具集合，减少重复操作，让效率成为默认选项。</p><a href="#community" class="text-link">关注后续进展 <span>↗</span></a><div class="card-watermark">⌬</div></article>
+    <article class="product-card reveal"><div class="product-card-top"><span class="product-icon">◌</span><span class="product-index">PRODUCT / 03</span></div><span class="product-tag">CLOUD SERVICES</span><h3>云服务平台</h3><p>以可靠性、安全性与可维护性为基础，支撑产品服务持续运行。</p><a href="#community" class="text-link">关注后续进展 <span>↗</span></a><div class="card-watermark">◌</div></article>
+    <article class="product-card product-coming reveal"><div class="product-card-top"><span class="product-icon">＋</span><span class="product-index">PRODUCT / 04</span></div><span class="product-tag">IN DEVELOPMENT</span><h3>更多可能</h3><p>新想法正在汇聚。更多产品与能力，将逐步加入星枢生态。</p><span class="coming-label"><i></i> 持续构建中</span><div class="card-watermark">✦</div></article>
+  </div>
+  <p class="section-note"><span>✦</span> 产品信息将随实际开发进度持续更新。部分项目仍处于规划或研发阶段。</p>
+</section>
 
-  <!-- 重点产品 -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head">
-        <span class="tag">OUR SERVICES</span>
-        <h2>重点产品与服务</h2>
-        <p>覆盖云计算、人工智能与数据智能的完整产品矩阵。</p>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-body">
-            <span class="card-tag">云计算</span>
-            <h3>星枢云平台</h3>
-            <p>一站式企业云服务平台，提供计算、存储、网络与容器等弹性资源，快速构建数字化基础设施。</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <span class="card-tag">人工智能</span>
-            <h3>星枢 AI 智能平台</h3>
-            <p>面向企业的大模型应用平台，支持智能客服、内容生成、知识问答等场景快速落地。</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <span class="card-tag">数据智能</span>
-            <h3>星枢数据中台</h3>
-            <p>统一数据采集、治理、分析与可视化，构建企业级数据资产体系，驱动数据化决策。</p>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top: 36px;">
-        <a href="products.html" class="btn btn-dark">查看全部产品服务</a>
-      </div>
-    </div>
-  </section>
+<section class="ecosystem-section" id="ecosystem"><div class="eco-visual"><div class="eco-ring ring-one"></div><div class="eco-ring ring-two"></div><div class="eco-ring ring-three"></div><div class="eco-center"><img src="assets/logo-mark.svg" alt="星枢标志"><span>星枢核心</span></div><div class="eco-node eco-n1">产品</div><div class="eco-node eco-n2">用户</div><div class="eco-node eco-n3">服务</div><div class="eco-node eco-n4">应用</div></div><div class="eco-copy reveal"><span class="eyebrow">ONE HUB, MANY POSSIBILITIES</span><h2>一个核心，<br><span>无限连接。</span></h2><p>星枢不只是一个名字，更是一种组织方式。以统一的核心为支点，让产品彼此协同，让服务自然连接，让生态随着每一次构建而生长。</p><div class="eco-points"><div><b>01</b><span><strong>统一核心</strong><small>共享基础能力，减少生态割裂</small></span></div><div><b>02</b><span><strong>开放连接</strong><small>让产品、用户与服务自然交汇</small></span></div><div><b>03</b><span><strong>持续进化</strong><small>随着需求变化，不断迭代与拓展</small></span></div></div></div></section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <div class="container">
-      <h2>准备好开启数字化之旅了吗？</h2>
-      <p>与我们的解决方案专家沟通，量身定制属于您的科技升级路径。</p>
-      <a href="contact.html" class="btn btn-primary">立即联系我们</a>
-    </div>
-  </section>
+<section class="about-section section" id="about"><div class="section-head reveal"><div><span class="eyebrow">THE MEANING BEHIND THE NAME</span><h2>星枢，因何而生<span class="blue-dot">?</span></h2></div><p>从浩瀚星海，到连接万物的核心节点。<br>名字，就是我们对数字生态的想象。</p></div><div class="meaning-layout"><article class="meaning-card reveal"><div class="meaning-symbol">✦</div><div><span class="meaning-en">STAR / POSSIBILITY</span><h3>星</h3><p>取自星辰、星海。代表浩瀚开放的数字空间，象征无限拓展的产品生态，也呼应系列产品的宇宙主题。</p></div><span class="meaning-number">01</span></article><article class="meaning-card reveal"><div class="meaning-symbol">⌖</div><div><span class="meaning-en">HUB / CONNECTION</span><h3>枢</h3><p>枢纽、核心支点。是万物交汇的中心，代表星枢生态作为连接用户、应用与服务的核心载体。</p></div><span class="meaning-number">02</span></article></div><div class="brand-manifesto reveal"><span class="manifesto-mark">“</span><div><span class="eyebrow">OUR VISION</span><h3>星辰之枢纽</h3><p>在浩瀚数字星海中，搭建一个交汇、联通的核心节点。所有自研产品围绕这个枢纽生长，形成统一、开放、持续进化的数字生态。</p></div><span class="manifesto-aside">XINGSHU<br>TECHNOLOGY</span></div></section>
 
-  <!-- 页脚 -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a href="index.html" class="logo" style="color:#fff;">
-            <span class="logo-icon">X</span>
-            <span>星枢科技</span>
-          </a>
-          <p style="margin-top:14px;">让科技驱动未来。星枢科技致力于通过云计算、人工智能与数据智能技术，帮助企业实现数字化转型升级。</p>
-        </div>
-        <div class="footer-col">
-          <h4>快速导航</h4>
-          <a href="index.html">首页</a>
-          <a href="about.html">关于我们</a>
-          <a href="products.html">产品服务</a>
-          <a href="cases.html">客户案例</a>
-          <a href="pricing.html">价格方案</a>
-          <a href="team.html">团队</a>
-          <a href="blog.html">新闻动态</a>
-          <a href="faq.html">常见问题</a>
-          <a href="contact.html">联系我们</a>
-          <a href="dns.html">域名管理</a>
-        </div>
-        <div class="footer-col">
-          <h4>产品服务</h4>
-          <a href="products.html">星枢云平台</a>
-          <a href="products.html">星枢 AI 智能平台</a>
-          <a href="products.html">星枢数据中台</a>
-          <a href="products.html">企业数字化咨询</a>
-        </div>
-        <div class="footer-col">
-          <h4>联系方式</h4>
-          <a href="https://lxcore.l.cd" target="_blank" rel="noopener">官网 lxcore.l.cd</a>
-          <a href="https://github.com/tomf02391-crypto" target="_blank" rel="noopener">GitHub @tomf02391-crypto</a>
-          <a href="https://t.me/xingshu_tech" target="_blank" rel="noopener">Telegram 频道 @xingshu_tech</a>
-          <a href="https://t.me/xingshu_chat" target="_blank" rel="noopener">Telegram 群组 @xingshu_chat</a>
-          <a href="https://t.me/xingshu_support" target="_blank" rel="noopener">Telegram 客服 @xingshu_support</a>
-          <div class="footer-mail">邮箱：敬请期待</div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © <span id="currentYear">2026</span> 星枢科技（XINGSHU TECH）。保留所有权利。
-      </div>
-    </div>
-  </footer>
-
-  <button class="back-top" aria-label="返回顶部">↑</button>
-  <script src="script.js"></script>
-</body>
-</html>
+<section class="community-section" id="community"><div class="community-bg"></div><div class="community-content"><div class="community-copy reveal"><span class="eyebrow">STAY IN ORBIT</span><h2>加入星枢，<br>保持<span>连接。</span></h2><p>关注官方动态、参与用户交流，获取产品更新与服务支持。</p><div class="community-signature"><img src="assets/logo-mark.svg" alt=""><span>星枢科技<br><small>XINGSHU TECH</small></span></div></div><div class="community-list reveal">
+<a href="https://lxcore.l.cd" target="_blank" rel="noopener noreferrer" class="community-link"><span class="community-icon">↗</span><span class="community-meta"><small>OFFICIAL WEBSITE</small><strong>星枢科技官网</strong><em>lxcore.l.cd</em></span><span class="link-arrow">↗</span></a>
+<a href="https://t.me/xingshu_tech" target="_blank" rel="noopener noreferrer" class="community-link"><span class="community-icon">◉</span><span class="community-meta"><small>OFFICIAL CHANNEL</small><strong>星枢科技频道</strong><em>@xingshu_tech</em></span><span class="link-arrow">↗</span></a>
+<a href="https://t.me/xingshu_chat" target="_blank" rel="noopener noreferrer" class="community-link"><span class="community-icon">⌁</span><span class="community-meta"><small>USER COMMUNITY</small><strong>用户交流群</strong><em>@xingshu_chat</em></span><span class="link-arrow">↗</span></a>
+<a href="https://t.me/xingshu_support" target="_blank" rel="noopener noreferrer" class="community-link"><span class="community-icon">◎</span><span class="community-meta"><small>CUSTOMER SUPPORT</small><strong>星枢客服</strong><em>@xingshu_support</em></span><span class="link-arrow">↗</span></a>
+</div></div></section>
+</main>
+<footer class="site-footer"><div class="footer-main"><a class="brand footer-brand" href="#home"><img src="assets/logo.svg" alt=""><span><strong>星枢科技</strong><small>XINGSHU TECH</small></span></a><p>星辰之枢纽。连接产品、用户与服务。<br>在数字星海中，构建持续生长的生态。</p><div class="footer-nav"><a href="#products">产品</a><a href="#ecosystem">生态</a><a href="#about">关于</a><a href="#community">社区</a></div></div><div class="footer-bottom"><span>© 2026 XINGSHU TECH. ALL RIGHTS RESERVED.</span><span>星枢 · 连接一切 <b>✦</b></span><a href="#home">返回顶部 ↑</a></div></footer>
+<script src="script.js" defer></script>
+</body></html>

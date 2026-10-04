@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /dns.html
-
 Sitemap: https://lxcore.l.cd/sitemap.xml
