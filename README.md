@@ -15,10 +15,10 @@
 
 ## 部署
 将此目录中的全部文件上传至静态网站根目录。确认 `index.html` 位于根目录，`assets/`、`styles.css`、`script.js` 同级。
-域名规划：`lxcore.l.cd`
+域名规划：`xingshu.de5.net`
 
 ## 官方入口
-- 官网： https://lxcore.l.cd
+- 官网： https://xingshu.de5.net
 - 频道： https://t.me/xingshu_tech
 - 群组： https://t.me/xingshu_chat
 - 客服： https://t.me/xingshu_support

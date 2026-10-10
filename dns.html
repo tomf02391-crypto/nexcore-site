@@ -24,14 +24,6 @@
       </a>
       <nav class="nav-links">
         <a href="index.html">首页</a>
-        <a href="about.html">关于我们</a>
-        <a href="products.html">产品服务</a>
-        <a href="cases.html">客户案例</a>
-        <a href="pricing.html">价格方案</a>
-        <a href="team.html">团队</a>
-        <a href="blog.html">新闻动态</a>
-        <a href="faq.html">常见问题</a>
-        <a href="contact.html">联系我们</a>
         <a href="dns.html">域名管理</a>
       </nav>
       <button class="nav-toggle" aria-label="切换导航菜单">
@@ -292,26 +284,18 @@
         <div class="footer-col">
           <h4>快速导航</h4>
           <a href="index.html">首页</a>
-          <a href="about.html">关于我们</a>
-          <a href="products.html">产品服务</a>
-          <a href="cases.html">客户案例</a>
-          <a href="pricing.html">价格方案</a>
-          <a href="team.html">团队</a>
-          <a href="blog.html">新闻动态</a>
-          <a href="faq.html">常见问题</a>
-          <a href="contact.html">联系我们</a>
           <a href="dns.html">域名管理</a>
         </div>
         <div class="footer-col">
           <h4>产品服务</h4>
-          <a href="products.html">星枢云平台</a>
-          <a href="products.html">星枢 AI 智能平台</a>
-          <a href="products.html">星枢数据中台</a>
-          <a href="products.html">企业数字化咨询</a>
+          <a href="index.html#products">星枢云平台</a>
+          <a href="index.html#products">星枢 AI 智能平台</a>
+          <a href="index.html#products">星枢数据中台</a>
+          <a href="index.html#products">企业数字化咨询</a>
         </div>
         <div class="footer-col">
           <h4>联系方式</h4>
-          <a href="https://lxcore.l.cd" target="_blank" rel="noopener">官网 lxcore.l.cd</a>
+          <a href="https://xingshu.de5.net" target="_blank" rel="noopener">官网 xingshu.de5.net</a>
           <a href="https://github.com/tomf02391-crypto" target="_blank" rel="noopener">GitHub @tomf02391-crypto</a>
           <a href="https://t.me/xingshu_tech" target="_blank" rel="noopener">Telegram 频道 @xingshu_tech</a>
           <a href="https://t.me/xingshu_chat" target="_blank" rel="noopener">Telegram 群组 @xingshu_chat</a>
@@ -341,6 +325,19 @@
 
   <script src="js/dns-config.js"></script>
   <script src="js/dns-page.js"></script>
-  <script src="script.js"></script>
+  <script>
+    document.querySelector('.nav-toggle')?.addEventListener('click', function () {
+      document.querySelector('.nav-links')?.classList.toggle('open');
+    });
+    const backTop = document.querySelector('.back-top');
+    if (backTop) {
+      backTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      window.addEventListener('scroll', function () {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+    }
+    const yearEl = document.getElementById('currentYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
